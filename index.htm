@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<title>Document</title>
+</head>
+<body>
+	<div id="root">
+		<div class="container">
+			<div class="row">
+				<div class="form-group">
+				  <label for="usuarios">Cantidad de usuarios</label>
+				  <input type="number" id="usuarios" v-model="cant" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="checkText">Ver texto</label>
+					<input type="checkbox" id="checkText" v-model="check">
+				</div>
+				<div class="form-group">
+					<label for="checkText">Ver lista</label>
+					<input type="checkbox" v-model="check_userlist">
+				</div>
+				<p v-if="check">Lorem ipsum dolor sit, amet consectetur, adipisicing elit. Vero perferendis voluptates molestiae ipsum veniam rerum nisi obcaecati. Placeat minus, blanditiis nostrum, dolorum laboriosam optio nesciunt esse, cupiditate, similique iure fugit!</p>
+				<ul v-if="check_userlist">
+					<li v-for="user in completeName">{{ user | ToUpperCase }}</li>
+				</ul>
+				<pre>
+					{{ $data }}
+				</pre>
+			</div>
+		</div>
+	</div>
+<script src="js/vue.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
