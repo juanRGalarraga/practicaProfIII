@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 1 -->
+        <form>
+            <input type="text" v-model="tarea" type="text" @keyUp="NewTarea">
+            <!-- <input type="submit" value=""> -->
+        </form>
+        <!-- 2 -->
+        <hr>
+        <ul>
+            <li v-for="user in users">
+                {{ user.name }}
+            </li>
+        </ul>
+        <!-- 3 -->
+        <hr>
+        <img :src="getImage" alt=""><br>
+        <input type="range" v-model="alto"> Ancho
+        <input type="range" v-model="ancho"> Alto
+        
+        <!-- 4 -->
+        <hr>
+        <div>
+            <input type="text" v-model="usuario">
+            <span>{{ estado }}</span>
+        </div>
+        <hr>    
+        <div>
+            <input type="text" v-model="numero">
+            <span>{{ getLength() }}</span>
+        </div>
+        <hr>
+        <div>
+            <form @submit.prevent="setUser">
+                <label for="title">Titulo</label>
+                <input type="text" v-model="title">
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+        <hr>
+        <div>
+            <label for=""> Ingresar </label>
+            <input type="checkbox" v-model="logged">
+            <div class="logginContainer" :class="checkLoggin">
+                <h3 class="loginMessage"> {{ returnMessage }}</h3>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>

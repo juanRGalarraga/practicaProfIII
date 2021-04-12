@@ -1,0 +1,38 @@
+Juego del Orden
+
+1) crear un juego en el que se tomen los datos desde una api, por ejemplo "https://jsonplaceholder.typicode.com/users" (de estos datos solo vamos a usar "name" y "username")
+2) luego vamos a mostrar de manera desordenada esos datos a la derecha de la pantalla.
+3) el juego se trata de ordenar esa lista lo mas rapido posible, para esto el jugador, debera hacer click en cada uno de los datos que mostramos y tratar de hacerlo ordenadamente.
+
+
+la idea es algo parecido a esto...
+
+[Datos tomados desde la Api]    [Datos Odenados]
+1 [Juan]                        1 [Ana]
+2 [Pedro]                        2 [Emma]    
+3 [Roberto]                        3 [Hector]
+4 [Ana]
+5 [Hector]
+6 [Marcelo]
+7 [Sandra]
+8 [Emma]
+
+Tiempo Transcurrido  1m 34s
+
+Si en esta instancia, el jugador hace click en Roberto, fijense que no es el que le sigue a Hector, en ese caso deberan tomar la desicion de dejar que termine de pasar los datos de la derecha a la izquierda o bien, avisarle que ese no es el dato que le sigue. Sientanse libres de hacer su parecer.
+
+Otra cosa que tambien pueden hacer es ir sacando los que ya fueron pasados a la lista ordenada, asi...
+
+[Datos tomados desde la Api]
+1 [Juan]                    1 [Ana]
+2 [Pedro]                    2 [Emma]    
+3 [Roberto]                    3 [Hector]
+4 []
+5 []
+6 [Marcelo]
+7 [Sandra]
+8 []
+
+Tiempo Transcurrido  1m 34s
+
+Quiero ver que tan ocurrentes son, asi que metanle fichas a esto y usen todos los conocimientos que hasta ahora han adquiridos
