@@ -1,27 +1,16 @@
+const VIDAS = 5;
+
 const app = new Vue({
 
     el: '#app',
 
     created()
     {
-
-        axios.get(this.urlBase)
-        .then(response => {
-
-            //Obtengo la lista de usuarios que llegan por API
-            this.listadoBase = response.data.map(listado => listado.name);
-
-            //Hago una copia ordenada del array
-            this.listadoOrdenado = this.listadoBase.slice().sort();
-
-        })
-        .catch(error => console.log(error));  
-
+        this.TraerDatos();
     },
 
     data: 
     {
-
         //Url a la API
         urlBase: 'https://jsonplaceholder.typicode.com/users',
 
@@ -58,6 +47,12 @@ const app = new Vue({
         //Mensaje para mostrar al usuario cuando clickea un elemento
         mensajePantalla: '',
 
+        //Indica si se quiere jugar con vidas
+        colocarVidas: true,
+
+        //Cantidad de vidas de las que dispone el usuario
+        vidas: VIDAS,
+
     },
 
     methods: 
@@ -86,6 +81,7 @@ const app = new Vue({
 
                 //Muestro mensaje 
                 this.mensajePantalla = "Es correcto. ¡Continúa!";
+                setTimeout( e => { this.mensajePantalla = ""; }, 1000);
 
                 //Aumento el índice
                 this.listadoOrdenadoIndex++;
@@ -94,10 +90,14 @@ const app = new Vue({
             else 
             {
                 //Caso contrario, sólo muestro mensaje al usuario
+                this.vidas--;
+
                 this.correcto = false;
                 this.incorrecto = true;
                 
                 this.mensajePantalla = "Es incorrecto. ¡Intenta de nuevo!"
+
+                setTimeout( e => { this.mensajePantalla = ""; }, 1000);
             }
         },
 
@@ -106,7 +106,16 @@ const app = new Vue({
          */
 
         InicializarJuego()
-        {
+        {      
+
+            this.vidas = VIDAS;
+
+            //Reinicio variables
+            this.finalizar = false;
+
+            this.listadoOrdenadoIndex = 0;
+
+            this.listadoOrdenUsuario = [];
 
             if(typeof this.timer !== "null"){ clearInterval(this.timer) }
 
@@ -115,6 +124,9 @@ const app = new Vue({
 
             //Inicializo la cantidad de segundos que se van a ir agregando
             let i = 1;
+
+            //Muestro el listado para iniciar el juego
+            this.empezar = true;
            
             //Inicio el timer
             this.timer = setInterval(e => {
@@ -130,10 +142,11 @@ const app = new Vue({
                 this.tiempoPantalla = this.FormatearTiempo(tiempoInicio);   
 
             }, 1000);
-
-            this.empezar = true;
+            
+            //Vuelvo a pedir datos a la API
+            this.TraerDatos();
+            
         }, 
-
 
         /**
          * Se le pasa un objeto Date y lo formatea en HH:mm:AA para mostrar en pantalla
@@ -165,21 +178,9 @@ const app = new Vue({
 
             //Detengo el interval
             clearInterval(this.timer);
-        }
-    },
-
-    computed: 
-    {
-        
-        badgeClass()
-        {
-            return {
-                'badge badge-success': this.correcto && !this.incorrecto,
-                'badge badge-danger' : !this.correcto && this.incorrecto
-            }
         },
 
-        desordenarArreglo(){
+        DesordenarArreglo(){
             
             //Si no está definido, retorno.
             if(typeof this.listadoBase == 'undefined'){ return false }
@@ -223,7 +224,38 @@ const app = new Vue({
                 this.listadoBase.push(listadoBaseAux[i].nombre);
             }
 
-            return this.listadoBase;
+            return;
+        },
+
+        TraerDatos()
+        {   
+            
+            axios.get(this.urlBase)
+            .then(response => {
+            
+            //Obtengo la lista de usuarios que llegan por API
+            this.listadoBase = response.data.map(listado => listado.name);
+            
+            //Desordeno el array
+            this.DesordenarArreglo();
+            
+            //Hago una copia ordenada del array
+            this.listadoOrdenado = this.listadoBase.slice().sort();
+
+            })
+            .catch(error => console.log(error)); 
+        },
+    },
+
+    computed: 
+    {
+        
+        badgeClass()
+        {
+            return {
+                'mensajePantalla mensajePantalla-succ': this.correcto && !this.incorrecto,
+                'mensajePantalla mensajePantalla-err' : !this.correcto && this.incorrecto
+            }
         },
 
     },
@@ -237,6 +269,15 @@ const app = new Vue({
             if(val.length == 0)
             {
                this.DetenerJuego();
+            }
+        },
+
+        vidas(val)
+        {
+            if(this.colocarVidas){
+                if(val == 0){
+                    this.DetenerJuego();
+                }
             }
         }
     }
