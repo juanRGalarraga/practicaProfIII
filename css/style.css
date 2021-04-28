@@ -1,0 +1,25 @@
+.bloque{
+    background-color: #e6eaea;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid black;
+}
+
+.bloqueRojo{
+	background-color: red;
+	color: white;
+}
+
+.bloqueVerde {
+	background-color: green;
+	color: white;
+}
+
+.pointer{
+	cursor: pointer;
+}
+
+.pointer:hover{
+    background-color: #aeb0b18a;
+    color: white;
+}
