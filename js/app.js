@@ -17,8 +17,6 @@ const buscaminasWrapper = {
 			fila[i] = column;
 		}
 
-		console.log(fila);
-
 		return {
 			fila,
 		}
@@ -31,15 +29,25 @@ const buscaminasWrapper = {
 	}
 }
 
+const buscaminasOptions = {
+	template: '#buscaminas-options',
+	data(){
+		return {
+			selected: '5',
+			options: [
+				{ text: '5 x 5', value: 5},
+				{ text: '10 x 10', value: 10},
+				{ text: '15 x 15', value: 15},
+				{ text: '20 x 20', value: 20},
+			]
+		}
+	}
+}
+
 const vue = new Vue({
 	el: '#root',
-	data: {
-		options: {
-			alto: 5,
-			ancho: 5
-		}
-	},
 	components: {
-		buscaminasWrapper
+		buscaminasWrapper,
+		buscaminasOptions
 	},
 });

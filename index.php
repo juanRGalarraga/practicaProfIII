@@ -11,14 +11,7 @@
 	<div id="root">
 		<div class="container">
 			<div class="row mt-2">
-				<div class="form-inline">
-					<label for="">Tamaño</label>
-					<select v-model="tamaño">
-						<option value="">5 x 5</option>
-						<option value="">10 x 10</option>
-						<option value="">5 x 5</option>
-					</select>
-				</div>
+				<buscaminas-options class="mb-2"></buscaminas-options>
 				<buscaminas-wrapper :alto="10" :ancho="10"></buscaminas-wrapper>
 			</div>
 		</div>
@@ -40,9 +33,14 @@
 	</div>
 </script>
 
-<script type="text/x-template" id="buscaminas-header">
-	<div class="form-inline">
-
+<script type="text/x-template" id="buscaminas-options">
+	<div class="form-inline col-3">
+		<label>Tamaño</label>
+		<select v-model="selected" class="form-control">
+			<option v-for="option in options" :value="option.value">
+				{{ option.text }}
+			</option>
+		</select>
 	</div>
 </script>
 
