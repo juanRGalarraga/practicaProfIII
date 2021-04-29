@@ -11,25 +11,28 @@
 	<div id="root">
 		<div class="container">
 			<div class="row mt-2">
-				<buscaminas-options class="mb-2"></buscaminas-options>
-				<buscaminas-wrapper :alto="10" :ancho="10"></buscaminas-wrapper>
+				<buscaminas-wrapper :alto="5" :ancho="5"></buscaminas-wrapper>
 			</div>
 		</div>
 		<pre>
-			{{ $data }}			
+			{{ $data }}
 		</pre>
 	</div>
 <script src="js/vue.js"></script>
 
 <script type="text/x-template" id="buscaminas-wrapper">
-	<div class="d-flex">
-		<table>
-			<tbody>
-				<tr v-for="(numero, index) in fila">
-					<td class="bloque pointer" v-for="i in numero">{{ i }}</td>
-				</tr>
-			</tbody>
-		</table>
+	<div>
+		<buscaminas-options></buscaminas-options>
+		<div class="d-flex">
+			{{ getCantidadBombas }}
+			<table>
+				<tbody>
+					<tr v-for="(numero, indexFila) in fila">
+						<td class="bloque pointer" v-for="(i, indexColumna) in numero" @click="ClickearBloque(i, indexFila, indexColumna)">{{ i }} </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </script>
 
