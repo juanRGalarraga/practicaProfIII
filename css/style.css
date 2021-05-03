@@ -2,7 +2,9 @@
     background-color: #e6eaea;
     padding-left: 10px;
     padding-right: 10px;
-    border: 1px solid black;
+    /* width: 34px; */
+    height: 30px;
+    border: 1px outset gray;
 }
 
 .bloqueRojo{

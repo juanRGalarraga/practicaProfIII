@@ -24,11 +24,10 @@
 	<div>
 		<buscaminas-options></buscaminas-options>
 		<div class="d-flex">
-			{{ getCantidadBombas }}
 			<table>
 				<tbody>
 					<tr v-for="(numero, indexFila) in fila">
-						<td class="bloque pointer" v-for="(i, indexColumna) in numero" @click="ClickearBloque(i, indexFila, indexColumna)">{{ i }} </td>
+						<td class="bloque pointer" v-for="(i, indexColumna) in numero" @click="ClickearBloque(i, indexFila, indexColumna)" :class="ColorBloque(i)">{{ i }} </td>
 					</tr>
 				</tbody>
 			</table>
