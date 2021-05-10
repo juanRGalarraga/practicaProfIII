@@ -53,43 +53,20 @@ const buscaminasWrapper = {
 		},
 
 		ClickearBloque(value, filaIndex, columnaIndex){
-			let finish = false,
-				i, j;
+			let stop, i, j;
 
 			if(!value.clickeado){
 				value.clickeado = true;
 			}
 
+			i = filaIndex;
+			j = columnaIndex;
+			
 			if(value.bomba == 0){
-				j = columnaIndex+1;
-				i = filaIndex;
-				if(j < this.fila[i].length){
-					while(!finish || j < this.fila[i].length){
-						if(!this.fila[i][j].clickeado){
-							if(this.fila[i][j].bomba == 1){
-								finish = true;
-							} else {
-								this.fila[i][j].clickeado = true;
-							}
-						}
-						j++;
-					}
-				}
-	
-				j = columnaIndex-1;
-				i = filaIndex;
-				if(j < this.fila[i].length){
-					while(!finish || j >= 0){
-						if(!this.fila[i][j].clickeado){
-							if(this.fila[i][j].bomba == 1){
-								finish = true;
-							} else {
-								this.fila[i][j].clickeado = true;
-							}
-						}
-						j--;
-					}
-				}
+				this.CheckBloques(i, j, "j > 0", "j", "-");
+				this.CheckBloques(i, j, "j < this.fila.length", "j", "+");
+				this.CheckBloques(i, j, "i > 0", "i", "-");
+				this.CheckBloques(i, j, "i < this.fila.length", "i", "+");
 			}
 
 		},
@@ -98,6 +75,34 @@ const buscaminasWrapper = {
 			return { 
 				'bloqueRojo' : i.clickeado && i.bomba == 1, 
 				'bloqueVerde' : i.clickeado && i.bomba == 0  
+			}
+		},
+
+		CheckBloques(indexRow, indexColumn, condicion, indexSelected, operation){
+			let stop = false;
+			let i = indexRow;
+			let j = indexColumn;
+			while(!stop && eval(condicion)){
+				if(indexSelected == "j"){
+					if(operation == "-"){
+						j--;
+					} else if(operation == "+") {
+						j++;
+					}
+				} else if(indexSelected == "i"){
+					if(operation == "-"){
+						i--;
+					} else if(operation == "+") {
+						i++;
+					}
+				}
+				if(this.fila[i][j].bomba == 0){
+					this.fila[i][j].clickeado = true;
+				}
+
+				if(this.fila[i][j].bomba == 1){
+					stop = true;
+				}
 			}
 		}
 	},

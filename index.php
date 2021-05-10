@@ -11,7 +11,7 @@
 	<div id="root">
 		<div class="container">
 			<div class="row mt-2">
-				<buscaminas-wrapper :alto="5" :ancho="5"></buscaminas-wrapper>
+				<buscaminas-wrapper :alto="10" :ancho="10"></buscaminas-wrapper>
 			</div>
 		</div>
 		<pre>
@@ -27,7 +27,8 @@
 			<table>
 				<tbody>
 					<tr v-for="(numero, indexFila) in fila">
-						<td class="bloque pointer" v-for="(i, indexColumna) in numero" @click="ClickearBloque(i, indexFila, indexColumna)" :class="ColorBloque(i)">{{ i }} </td>
+						<td class="bloque pointer" v-for="(i, indexColumna) in numero" 
+						  @click="ClickearBloque(i, indexFila, indexColumna)" :class="ColorBloque(i)">{{ "Bomba: " + i.bomba + " " + "Alrededor: " +  i.valores }}</td>
 					</tr>
 				</tbody>
 			</table>
